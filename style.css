@@ -1,0 +1,156 @@
+/* Set the dark, premium black-and-gold page theme. */
+:root {
+  color-scheme: dark;
+  --background: #090909;
+  --card: #141414;
+  --gold: #f2c75c;
+  --gold-light: #ffe6a1;
+  --text: #fffaf0;
+  --muted: #c2bba9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(ellipse at 50% 35%, rgb(242 199 92 / 9%), transparent 55%),
+    var(--background);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Center the content in a polished card with a subtle gold border. */
+.card {
+  width: min(100%, 680px);
+  padding: clamp(32px, 7vw, 64px);
+  text-align: center;
+  background: linear-gradient(145deg, #191919, var(--card));
+  border: 1px solid rgb(242 199 92 / 35%);
+  border-radius: 24px;
+  box-shadow: 0 24px 80px rgb(0 0 0 / 55%), 0 0 40px rgb(242 199 92 / 7%);
+}
+
+/* Make the emoji prominent and give it a gentle floating motion. */
+.emoji {
+  margin-bottom: 22px;
+  font-size: clamp(4rem, 15vw, 7rem);
+  line-height: 1;
+  filter: drop-shadow(0 8px 18px rgb(242 199 92 / 15%));
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Fade and lift the main text into view. */
+.message {
+  animation: fade-in 900ms ease-out both;
+}
+
+.message h1 {
+  margin: 0;
+  color: var(--gold-light);
+  font-size: clamp(1.7rem, 5vw, 2.8rem);
+  line-height: 1.25;
+  letter-spacing: -0.04em;
+}
+
+.message p {
+  margin: 18px 0 30px;
+  color: var(--muted);
+  font-size: clamp(1rem, 3vw, 1.15rem);
+}
+
+/* Style the primary button with a small gold shine on hover. */
+.consider-button {
+  min-height: 54px;
+  padding: 14px 24px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  color: #171208;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 750;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgb(242 199 92 / 18%);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.consider-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgb(242 199 92 / 30%);
+}
+
+.consider-button:focus-visible {
+  outline: 3px solid var(--text);
+  outline-offset: 4px;
+}
+
+/* Apply briefly when the button is clicked. */
+.consider-button.shake {
+  animation: shake 350ms ease-in-out;
+}
+
+/* Keep the funny response hidden until the button is pressed. */
+.popup {
+  margin: 24px 0 0;
+  padding: 16px;
+  border: 1px solid rgb(242 199 92 / 35%);
+  border-radius: 14px;
+  background: rgb(242 199 92 / 8%);
+  color: var(--gold-light);
+  line-height: 1.5;
+  animation: fade-in 350ms ease-out both;
+}
+
+/* Keyframes for the emoji, message entrance, and button shake. */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  25% { transform: translateX(-5px) rotate(-1deg); }
+  50% { transform: translateX(5px) rotate(1deg); }
+  75% { transform: translateX(-3px) rotate(-0.5deg); }
+}
+
+/* Respect visitors who prefer reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Tighten spacing slightly on narrow mobile screens. */
+@media (max-width: 420px) {
+  .card {
+    padding: 32px 22px;
+  }
+
+  .consider-button {
+    width: 100%;
+  }
+}
